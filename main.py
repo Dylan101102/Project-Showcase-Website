@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas
 from PIL import Image
 
 st.set_page_config(layout="wide")
@@ -6,7 +7,7 @@ st.set_page_config(layout="wide")
 col1, col2 = st.columns(2)
 
 with col1:
-    image = Image.open("images/profile.jpeg")
+    image = Image.open("images\profile.jpeg")
     new_image = image.resize((600, 600))
     st.image(new_image)
 
@@ -23,3 +24,15 @@ content2 = """
 Below you can find some of the apps I have built in Python. Feel free to contact me!
 """
 st.write(content2)
+
+col3, col4 = st.columns(2)
+
+dataframe = pandas.read_csv("data.csv", sep=";")
+#print(dataframe)
+with col3:
+    for index, row in dataframe[:10].iterrows(): # [:10] means the first 10.
+        st.header(row["title"])
+
+with col4:
+    for index, row in dataframe[10:].iterrows(): # [:10] means everything after the tenth.
+        st.header(row["title"])
