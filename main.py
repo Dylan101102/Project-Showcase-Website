@@ -25,14 +25,21 @@ Below you can find some of the apps I have built in Python. Feel free to contact
 """
 st.write(content2)
 
-col3, col4 = st.columns(2)
+col3, empty_col, col4 = st.columns([1.5, 0.5, 1.5])
 
 dataframe = pandas.read_csv("data.csv", sep=";")
 #print(dataframe)
 with col3:
     for index, row in dataframe[:10].iterrows(): # [:10] means the first 10.
         st.header(row["title"])
+        st.write(row["description"])
+        st.image(f"images/{row['image']}")
+        st.write(f"[Source Code]({row['url']})")
+
 
 with col4:
     for index, row in dataframe[10:].iterrows(): # [:10] means everything after the tenth.
         st.header(row["title"])
+        st.write(row["description"])
+        st.image(f"images/{row['image']}")
+        st.write(f"[Source Code]({row['url']})")
